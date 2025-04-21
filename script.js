@@ -1,6 +1,6 @@
 const screen = document.getElementById("screen");
-// const input = [];
-// let n = 0;
+const input = [];
+let n = 0;
 let text = "";
 
 
