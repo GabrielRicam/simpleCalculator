@@ -81,7 +81,3 @@ body {
 .b-e:hover {
     background-color: rgb(159, 144, 163);
 }
-
-.button-pressed {
-    border-bottom: none;
-}

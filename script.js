@@ -60,9 +60,7 @@ document.addEventListener("keydown", function (pressed) {
             history.textContent = " ";
         } else { // Not enough operator
             screen.style.color = "rgb(255, 88, 88)";
-            setTimeout(() => {
-            screen.style.color = "";
-            }, 200);
+            setTimeout(() => {screen.style.color = "";}, 200);
         } 
     }
 })
@@ -128,8 +126,14 @@ document.getElementById("equal").addEventListener("click", function() { //Equal
         history.textContent = " ";
     } else { // Not enough operator
         screen.style.color = "rgb(255, 88, 88)";
-        setTimeout(() => {
-        screen.style.color = "";
-        }, 200);
+        setTimeout(() => {screen.style.color = "";}, 200);
     } 
 })
+
+document.querySelectorAll("button").forEach(function(el) {
+    el.addEventListener("click", function() {
+        this.style.borderBottom = "none";
+        setTimeout(() => {this.style.borderBottom = "";}, 200);
+    });
+});
+  
