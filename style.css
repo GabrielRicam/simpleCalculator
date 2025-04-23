@@ -34,6 +34,7 @@ body {
 #log {
     font-weight: bold;
     color: rgb(182, 169, 152);
+    width: 50px;
 }
 #screen {
     color: rgb(110, 99, 83);

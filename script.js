@@ -1,42 +1,42 @@
 const screen = document.getElementById("screen");
+const history = document.getElementById("log");
 const operator = ['+', '-', '/', '*'];
 let text = [];
 let n = 0;
 text[n] = "0";
 
 
-
+// Keyboard Input
 document.addEventListener("keydown", function (pressed) {
-    
-    if (!isNaN(pressed.key) && pressed.key.length === 1)  {
+    if (!isNaN(pressed.key) && pressed.key.length === 1)  { //Detecting number input
         if (text[n].length < 14 && !operator.includes(text[n].charAt(text[n].length - 1))) {
             if (text[n] === "0") text[n] = "";
             text[n] += pressed.key;
             screen.textContent = text[n];
-        } else if (operator.includes(text[n].charAt(text[n].length - 1))){
-            console.log(text[n]);
             
+        } else if (operator.includes(text[n].charAt(text[n].length - 1))){  //Making new array for another operator
+            history.textContent = text[n];
             n++;
             text[n] = "0";
-        } else {
+        } else { // Character exceed
             screen.style.color = "rgb(255, 88, 88)";
             setTimeout(() => {
                 screen.style.color = "";
                 }, 200);
         }
-    } else if (pressed.key === "Backspace") {
+    } else if (pressed.key === "Backspace") { //Delete
         text[n] = text[n].slice(0, -1);
         if (text[n] === "") text = "0";
         screen.textContent = text;
-    } else if (pressed.key === "Escape") {
+    } else if (pressed.key === "Escape") { //Reset
         text[n] = "0";
         screen.textContent = text[n];
-    } else if (operator.includes(pressed.key) && text[n].length != 1) {
+    } else if (operator.includes(pressed.key) && text[n].length != 1) { //Operator
         if (text[n].length < 14 && !operator.includes(text[n].charAt(text[n].length - 1))) {
             if (text[n] === "0") text[n] = "";
             text[n] += pressed.key;
             screen.textContent = text[n];
-        } else {
+        } else { //Operator overlap
             screen.style.color = "rgb(255, 88, 88)";
             setTimeout(() => {
                 screen.style.color = "";
@@ -46,18 +46,19 @@ document.addEventListener("keydown", function (pressed) {
     }
 })
 
+// On-screen button input
 document.querySelectorAll(".b-n").forEach(function(el) {
   el.addEventListener("click", function() {
     if (text[n].length < 14 && !operator.includes(text[n].charAt(text[n].length - 1))) {
             if (text[n] === "0") text[n] = "";
             text[n] += this.textContent;
             screen.textContent = text[n];
-        } else if (operator.includes(text[n].charAt(text[n].length - 1))){
+        } else if (operator.includes(text[n].charAt(text[n].length - 1))){ //Making new array for another operator
             n++;
             text[n] = "0";
             screen.textContent = text[n];
-        } else {
-            screen.style.color = "rgb(255, 88, 88)";
+        } else {  //Character exceed
+            screen.style.color = "rgb(255, 88, 88)"; 
             setTimeout(() => {
                 screen.style.color = "";
                 }, 200);
@@ -65,7 +66,7 @@ document.querySelectorAll(".b-n").forEach(function(el) {
   });
 });
 
-document.querySelectorAll(".b-a").forEach(function(el) {
+document.querySelectorAll(".b-a").forEach(function(el) { // Operator
     el.addEventListener("click", function() {
         if (text[n].length < 14 && !operator.includes(text[n].charAt(text[n].length - 1))) {
             if (text[n] === "0") text[n] = "";
@@ -75,7 +76,7 @@ document.querySelectorAll(".b-a").forEach(function(el) {
                 text[n] += this.textContent;
             }
             screen.textContent = text[n];
-        } else {
+        } else { //Operator overlap
             screen.style.color = "rgb(255, 88, 88)";
             setTimeout(() => {
                 screen.style.color = "";
@@ -83,13 +84,13 @@ document.querySelectorAll(".b-a").forEach(function(el) {
         }
     });
 });
-document.getElementById("delete").addEventListener("click", function() {
+document.getElementById("delete").addEventListener("click", function() { //Delete
     text[n] = text[n].slice(0, -1);
     if (text[n] === "") text[n] = "0";
     screen.textContent = text[n];
 })
 
-document.getElementById("reset").addEventListener("click", function() {
+document.getElementById("reset").addEventListener("click", function() { //Reset
     text[n] = "0";
     screen.textContent = text[n];
 })
